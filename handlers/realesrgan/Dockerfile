@@ -10,7 +10,6 @@ RUN pip install --no-cache-dir torch torchvision --index-url https://download.py
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY handler.py model.py ./
-COPY shared/ /app/shared/
 
 ENV PYTHONUNBUFFERED=1
 ENV MODEL_DIR=/runpod-volume/models/realesrgan

@@ -16,9 +16,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy handler code
 COPY handler.py model.py ./
 
-# Copy shared utilities
-COPY shared/ /app/shared/
-
 ENV PYTHONUNBUFFERED=1
 ENV HF_HOME=/runpod-volume/models/huggingface
 
