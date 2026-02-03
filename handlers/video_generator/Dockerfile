@@ -8,6 +8,12 @@ WORKDIR /app
 # Install additional system dependencies
 RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 
+# Upgrade PyTorch to 2.2+ for diffusers compatibility
+RUN pip install --no-cache-dir --upgrade \
+    torch==2.2.0 \
+    torchvision \
+    --index-url https://download.pytorch.org/whl/cu118
+
 # Install Python packages
 RUN pip install --no-cache-dir \
     runpod \
