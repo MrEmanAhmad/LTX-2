@@ -4,10 +4,18 @@ Supports: generate_image, generate_video, full_pipeline
 """
 
 import runpod
+
+print("=" * 50)
+print("VIDEO GENERATOR HANDLER STARTING")
+print("=" * 50)
+
 from model import get_model
+
+print("Handler module loaded successfully")
 
 
 def handler(job):
+    print(f"Received job: {job.get('id', 'unknown')}")
     """
     RunPod handler for unified video generation
     
