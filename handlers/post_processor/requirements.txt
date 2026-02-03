@@ -1,0 +1,10 @@
+runpod
+torch>=2.2.0
+torchvision
+basicsr>=1.4.2
+realesrgan
+facexlib
+gfpgan
+opencv-python-headless
+Pillow
+numpy

@@ -1,0 +1,11 @@
+runpod
+torch>=2.2.0
+torchvision
+diffusers>=0.27.0
+transformers
+accelerate
+safetensors
+sentencepiece
+Pillow
+opencv-python-headless
+imageio[ffmpeg]
