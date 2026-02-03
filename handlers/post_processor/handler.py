@@ -7,10 +7,10 @@ Supports: restore_faces, upscale, interpolate, full_post_process
 import torch
 if not hasattr(torch, 'xpu'):
     class FakeXPU:
-        def is_available(self): return False
-        def empty_cache(self): pass
-        def synchronize(self): pass
-        def device_count(self): return 0
+        def __getattr__(self, name):
+            def noop(*args, **kwargs):
+                return False if 'available' in name else 0 if 'count' in name else None
+            return noop
     torch.xpu = FakeXPU()
 
 import runpod
