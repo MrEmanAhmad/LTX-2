@@ -1,23 +1,14 @@
 # Unified Video Generator: FLUX + LTX-Video + Wan2.1
 # Requires: 48GB+ VRAM (A6000, A100-40GB, or A100-80GB)
 
-FROM python:3.10-slim
+FROM runpod/pytorch:2.1.0-py3.10-cuda11.8.0-devel-ubuntu22.04
 
 WORKDIR /app
 
-# Install system dependencies
-RUN apt-get update --fix-missing && \
-    apt-get install -y --no-install-recommends \
-    ffmpeg \
-    git \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+# Install additional system dependencies
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 
-# Install Python dependencies
-RUN pip install --no-cache-dir \
-    torch==2.2.0 \
-    torchvision \
-    --index-url https://download.pytorch.org/whl/cu121
-
+# Install Python packages
 RUN pip install --no-cache-dir \
     runpod \
     diffusers>=0.27.0 \
