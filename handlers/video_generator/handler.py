@@ -3,6 +3,11 @@ Unified Video Generator Handler for RunPod
 Supports: generate_image, generate_video, full_pipeline
 """
 
+# Fix torch.xpu issue before any imports
+import torch
+if not hasattr(torch, 'xpu'):
+    torch.xpu = None
+
 import runpod
 
 print("=" * 50)

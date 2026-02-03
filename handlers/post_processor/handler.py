@@ -3,6 +3,11 @@ Unified Post-Processor Handler for RunPod
 Supports: restore_faces, upscale, interpolate, full_post_process
 """
 
+# Fix torch.xpu issue before any imports
+import torch
+if not hasattr(torch, 'xpu'):
+    torch.xpu = None
+
 import runpod
 
 print("=" * 50)

@@ -4,10 +4,14 @@ Combines: CodeFormer (face restore) + Real-ESRGAN (upscale) + RIFE (interpolatio
 """
 
 import os
-import torch
 import subprocess
 import shutil
 from pathlib import Path
+
+# Fix torch.xpu issue before importing other libraries
+import torch
+if not hasattr(torch, 'xpu'):
+    torch.xpu = None
 
 # Model cache directory
 MODEL_CACHE = os.environ.get("HF_HOME", "/runpod-volume/models")
@@ -20,6 +24,7 @@ class UnifiedPostProcessor:
         self.esrgan = None
         self.rife = None
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        print(f"Using device: {self.device}")
         
     def load_codeformer(self):
         """Load CodeFormer model for face restoration"""

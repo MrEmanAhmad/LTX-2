@@ -4,9 +4,13 @@ Combines: FLUX.1 Dev (image) + LTX-Video 2 (video) + Wan2.1 (video)
 """
 
 import os
-import torch
 import subprocess
 from pathlib import Path
+
+# Fix torch.xpu issue before importing diffusers
+import torch
+if not hasattr(torch, 'xpu'):
+    torch.xpu = None
 
 # Model cache directory
 MODEL_CACHE = os.environ.get("HF_HOME", "/runpod-volume/models")
@@ -18,6 +22,7 @@ class UnifiedVideoGenerator:
         self.ltx_pipe = None
         self.wan_pipe = None
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        print(f"Using device: {self.device}")
         
     def load_flux(self):
         """Load FLUX.1 Dev model for image generation"""
