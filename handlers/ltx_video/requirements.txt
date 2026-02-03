@@ -1,0 +1,11 @@
+# LTX-Video Handler Dependencies
+runpod>=1.6.0
+torch>=2.2.0
+diffusers>=0.27.0
+transformers>=4.38.0
+accelerate>=0.27.0
+safetensors>=0.4.0
+sentencepiece>=0.1.99
+Pillow>=10.0.0
+imageio>=2.33.0
+imageio-ffmpeg>=0.4.9
