@@ -6,7 +6,12 @@ Supports: restore_faces, upscale, interpolate, full_post_process
 # Fix torch.xpu issue before any imports
 import torch
 if not hasattr(torch, 'xpu'):
-    torch.xpu = None
+    class FakeXPU:
+        def is_available(self): return False
+        def empty_cache(self): pass
+        def synchronize(self): pass
+        def device_count(self): return 0
+    torch.xpu = FakeXPU()
 
 import runpod
 

@@ -11,7 +11,12 @@ from pathlib import Path
 # Fix torch.xpu issue before importing other libraries
 import torch
 if not hasattr(torch, 'xpu'):
-    torch.xpu = None
+    class FakeXPU:
+        def is_available(self): return False
+        def empty_cache(self): pass
+        def synchronize(self): pass
+        def device_count(self): return 0
+    torch.xpu = FakeXPU()
 
 # Model cache directory
 MODEL_CACHE = os.environ.get("HF_HOME", "/runpod-volume/models")
